@@ -49,6 +49,8 @@ int come(int i, int j, int pcome, int **mat){
 void backtracking(int **mat){
 
     int p=0;
+    int x, y;
+    int tipo;
 
     int **aux = new int*[R]; //cria matriz auxiliar que contém a matriz alterada 
     for(int i=0; i<R; i++)
@@ -75,22 +77,35 @@ void backtracking(int **mat){
                         break;
                 }
                 p++;
+                x=i+1;
+                y=j+1;
+                tipo=aux[i][j];
             }
         }        
     }
     if(p == 1){
-        cout<< endl;
-        for(int i=0; i<R; i++){
-            for(int j=0; j<C; j++)
-                cout << aux[i][j] << " ";  
-            cout<< endl;
+        total++;
+        int flag = 1;
+        
+        for(int i = 0; i<pos.size(); i++){
+            if(pos[i] == make_tuple(x,y,tipo)){
+                flag = 0;
+                break;
+            }
         }
+    
+        if(flag){
+            pos.push_back(make_tuple(x,y,tipo));
+            dif++;
+        }
+//        for(int i=0; i<R; i++){
+//            for(int j=0; j<C; j++)
+//                cout << aux[i][j] << " ";
+//        }
     }
     for(int i=0; i<R; i++)
         delete[] aux[i];
     delete[] aux;
-    
-
 }
 
 
@@ -113,7 +128,14 @@ int main(int argc, const char * argv[]) {
     }
 
     backtracking(tab);
-
+    
+    cout<<total<<endl<<dif<<endl;
+    int x, y, tipo;
+    for(int i = 0; i<pos.size();i++){
+        tie(x, y ,tipo) = pos[i];
+        cout<<x<<" "<<y<<" "<<tipo<<endl;
+    }
+    
  /*  for(int i = 0; i<R; i++){
         for(int j = 0;j<C; j++){
             cout<<tab[i][j]<<" ";
