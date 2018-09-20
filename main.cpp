@@ -60,21 +60,21 @@ void backtracking(int **mat){
 
     for(int i=0; i<R; i++){
         for(int j=0; j<C; j++){
-            switch(aux[i][j]){
-                case 1:
-                    if(come(i, j, 2, aux))
-                        p++;
-                    break;
+            if(aux[i][j] !=0){
+                switch(aux[i][j]){
+                    case 1:
+                        come(i, j, 2, aux);
+                        break;
 
-                case 2:
-                    if(come(i, j, 3, aux))
-                        p++;
-                    break;
+                    case 2:
+                        come(i, j, 3, aux);
+                        break;
 
-                case 3:
-                    if(come(i, j, 1, aux))
-                        p++;
-                    break;
+                    case 3:
+                        come(i, j, 1, aux);
+                        break;
+                }
+                p++;
             }
         }        
     }
@@ -82,7 +82,7 @@ void backtracking(int **mat){
         cout<< endl;
         for(int i=0; i<R; i++){
             for(int j=0; j<C; j++)
-                cout << mat[i][j] << " ";  
+                cout << aux[i][j] << " ";  
             cout<< endl;
         }
     }
